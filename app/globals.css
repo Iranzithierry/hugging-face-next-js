@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.overlay {
+    /* background-image: url("/grid.svg");
+    opacity: 0.4;
+    filter: invert(1);
+    height: 400px;
+    width: 400px; */
+}

@@ -1,27 +1,30 @@
 'use client';
 
 import { useChat } from 'ai/react';
+import Providers from './providers';
+import { Input, Loading } from '@geist-ui/core';
+import ChatItem from '@/components/chat-item';
+import ChatInput from '@/components/chat-input';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
+import { BotIcon } from '@/components/icons';
 
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
-
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat();
+  useEffect(() => {
+    if (error) toast.error(error.message.toString())
+  }, [error])
   return (
-    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-      {messages.map(m => (
-        <div key={m.id} className="whitespace-pre-wrap">
-          {m.role === 'user' ? 'User: ' : 'AI: '}
-          {m.content}
-        </div>
-      ))}
-
-      <form onSubmit={handleSubmit}>
-        <input
-          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
-          value={input}
-          placeholder="Say something..."
-          onChange={handleInputChange}
-        />
-      </form>
-    </div>
+    <Providers>
+      <div className="w-full mx-auto pb-[5rem] md:pb-28">
+        {messages.map(message => (
+          <ChatItem
+            key={message.id}
+            message={message.content}
+            role={message.role} />
+        ))}
+      </div>
+      <ChatInput onSubmit={handleSubmit} onChange={handleInputChange} inputValue={input} />
+    </Providers>
   );
 }
