@@ -23,7 +23,7 @@ export default function ChatInput({ onSubmit, onChange, inputValue }: chatInputP
                     </button>
                 </form>
                 <div className='w-full flex flex-row justify-center items-center'>
-                    <p className='font-thin text-xs text-slate-500/80 line-clamp-2  text-center'>
+                    <p className='text-xs text-slate-500/80 line-clamp-2  text-center'>
                         <Link target='_blank' href='https://github.com/iranzithierry' className='underline-offset-2' underline={true} icon={true}>
                             Built with HuggingFace and Vercel AI SDK. View the repo or deploy your own.
                         </Link>
